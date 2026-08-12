@@ -5,6 +5,10 @@
   font-family: "Poppins", sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --bg-page: #06111f;
   --primary-color: #3b82f6;
@@ -26,18 +30,24 @@
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  
-  svg {
-    width: 20vw;
-    height: auto;
+}
+
+.preloader-logo {
+  width: min(31vw, 360px);
+  height: auto;
+  display: block;
+  animation: preloader-logo-pulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes preloader-logo-pulse {
+  from {
+    opacity: 0.78;
+    transform: scale(0.96);
   }
 
-  path {
-    fill: rgba(59, 130, 246, 0.12);
-    stroke: #3b82f6;
-    stroke-width: 4px;
-    stroke-dasharray: 2050px;
-    stroke-dashoffset: 2050px;
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -149,6 +159,18 @@ header nav.menu-desktop ul li {
   padding: 0 20px;
 }
 
+.logo img {
+  width: 110px;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .logo img {
+    width: 88px;
+  }
+}
+
 .btn-social {
   display: flex;
   gap: 15px;
@@ -168,6 +190,12 @@ header nav.menu-desktop ul li {
   transform: scale(1.2);
 }
 
+.logo-footer img {
+  width: 72px;
+  height: auto;
+  display: block;
+}
+
 /* ESTILO DO BANNER */
 
 .banner-section {
@@ -180,47 +208,17 @@ header nav.menu-desktop ul li {
   justify-content: flex-start;
   position: relative;
   overflow: hidden;
-
-  picture {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: -2;
-    left: 0;
-    top: 0;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-    }
-
-    img.bg {
-      width: 85%;
-      height: 85%;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-    }
-  }
 }
 
 .hero-media {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  width: min(50vw, 820px);
+  inset: 0;
   height: 100%;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: stretch;
+  justify-content: stretch;
   pointer-events: none;
-  z-index: -1;
-  padding-right: 0;
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 58%, rgba(0, 0, 0, 0.92) 72%, rgba(0, 0, 0, 0) 100%);
-  mask-image: radial-gradient(ellipse at center, #000 58%, rgba(0, 0, 0, 0.92) 72%, rgba(0, 0, 0, 0) 100%);
-  filter: drop-shadow(0 0 28px rgba(59, 130, 246, 0.18));
+  z-index: -2;
 }
 
 .hero-video,
@@ -228,7 +226,8 @@ header nav.menu-desktop ul li {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center right;
+  object-position: center center;
+  filter: saturate(0.95) brightness(0.72) contrast(1.02);
 }
 
 .hero-gif {
@@ -237,7 +236,9 @@ header nav.menu-desktop ul li {
 
 .banner-section:before {
   content: "";
-  background: linear-gradient(180deg, rgba(6, 17, 31, 0) 25%, var(--bg-page) 100%);
+  background:
+    linear-gradient(90deg, rgba(6, 17, 31, 0.88) 0%, rgba(6, 17, 31, 0.72) 36%, rgba(6, 17, 31, 0.24) 62%, rgba(6, 17, 31, 0.52) 100%),
+    linear-gradient(180deg, rgba(6, 17, 31, 0.18) 0%, rgba(6, 17, 31, 0.85) 100%);
   width: 100%;
   height: 100%;
   position: absolute;
@@ -247,15 +248,24 @@ header nav.menu-desktop ul li {
 }
 
 .banner-section .interface {
-  width: 75%;
+  width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
 .txt-banner {
-  max-width: 500px;
+  max-width: 560px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-top: 50px;
+  padding: 32px 30px;
+  border-radius: 28px;
+  background: rgba(6, 17, 31, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
 }
 
 .txt-banner h2 {
@@ -318,6 +328,7 @@ section.conhecimentos {
   font-size: 12px;
   color: var(--detail-color);
   margin-bottom: 8px;
+  min-height: 38px;
 }
 
 .bar {
@@ -333,37 +344,37 @@ section.conhecimentos {
   border-radius: 10px;
 }
 
-.html {
+.skill-sql {
   width: 90%;
-  background: linear-gradient(90deg, #ff4c1e, #ff651e);
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
 }
-.css {
-  width: 85%;
-  background: linear-gradient(90deg, #004ce8, #2b7ff6);
+.skill-python {
+  width: 66%;
+  background: linear-gradient(90deg, #3776ab, #60a5fa, #ffd43b);
 }
-.js {
-  width: 75%;
+.skill-power-bi {
+  width: 89%;
   background: linear-gradient(90deg, #e4a126, #f0be25);
 }
-.python {
+.skill-excel {
   width: 70%;
-  background: linear-gradient(90deg, #3774a7, #ffd03f);
+  background: linear-gradient(90deg, #107c41, #21a366);
 }
-.wordpress {
-  width: 90%;
-  background: linear-gradient(90deg, #4fd6f0, #245387);
+.skill-dbt {
+  width: 63%;
+  background: linear-gradient(90deg, #ff694a, #ff9d2e);
 }
-.elementor {
-  width: 85%;
-  background: linear-gradient(90deg, #322877, #e02c5c);
+.skill-airflow {
+  width: 52%;
+  background: linear-gradient(90deg, #017cee, #00c7d9);
 }
-.django {
+.skill-git-github {
   width: 70%;
-  background: linear-gradient(90deg, #1d4ed8, #60a5fa);
+  background: linear-gradient(90deg, #ea580c, #fb923c);
 }
-.next {
-  width: 55%;
-  background: linear-gradient(90deg, #e8e8e8, #9d9d9d);
+.skill-power-automate {
+  width: 100%;
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
 }
 
 /* ESTILO DA SEÇÃO portfólio */
@@ -933,40 +944,29 @@ footer .line-footer p a:hover {
     overflow-x: hidden;
   }
 
-  .banner-section picture:first-of-type img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important; 
-    filter: hue-rotate(175deg) saturate(0.9) brightness(0.68);
-  }
-
   .hero-media {
-    right: 50%;
-    transform: translateX(50%);
-    width: 95vw;
-    height: 58vh;
-    bottom: 0;
-    -webkit-mask-image: radial-gradient(ellipse at center, #000 62%, rgba(0, 0, 0, 0.88) 78%, rgba(0, 0, 0, 0) 100%);
-    mask-image: radial-gradient(ellipse at center, #000 62%, rgba(0, 0, 0, 0.88) 78%, rgba(0, 0, 0, 0) 100%);
+    inset: 0;
   }
 
   .hero-video {
-    display: none;
+    display: block;
   }
 
   .hero-gif {
-    display: block;
+    display: none;
   }
 
   .txt-banner {
     max-width: 100% !important;
-    margin-top: 60vh !important;
+    margin-top: 58vh !important;
     position: relative;
     z-index: 10; 
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding: 24px 20px;
+    background: rgba(6, 17, 31, 0.5);
   }
 
   .txt-banner h2 {
@@ -1222,7 +1222,7 @@ footer .line-footer p a:hover {
 }
 
 .hero-subtitle {
-  color: var(--detail-color);
+  color: #d4def0;
   font-size: 16px;
   line-height: 1.7;
   max-width: 460px;

@@ -1,9 +1,4 @@
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
-
-ScrollSmoother.create({
-  smooth: 1.5,
-  effects: true,
-});
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 let mm = gsap.matchMedia();
 
@@ -34,7 +29,7 @@ mm.add({
         trigger: ".certificados",
         start: isMobile ? "top -4%" : "top -25%", 
         end: () => `+=${wrapper.scrollWidth * (isMobile ? 0.8 : 0.6)}`, 
-        pin: true,
+        pin: false,
         scrub: 2,
         invalidateOnRefresh: true, 
       },
@@ -109,28 +104,4 @@ gsap.to(".timeline-progress", {
     end: "bottom center",
     scrub: true, 
   },
-});
-
-// PRELOADER
-const tl = gsap.timeline({
-  onComplete() {
-    gsap.to("#preloader", {
-      opacity: 0,
-      onComplete(){
-        gsap.to("#preloader",{
-          display: "none",
-        })
-      }
-    });
-  },
-});
-
-tl.to("#preloader path", {
-  duration: 1,
-  strokeDashoffset: 0,
-});
-tl.to("#preloader path", {
-  fill: "#2ccf7f",
-  duration: 0.5,
-  strokeDashoffset: 0,
 });
