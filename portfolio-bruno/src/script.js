@@ -8,30 +8,20 @@ mm.add({
 }, (context) => {
   let { isMobile } = context.conditions;
 
-  if (!isMobile) {
-    ScrollTrigger.create({
-      trigger: ".about-me",
-      start: "top -50px",
-      end: "bottom 600px",
-      pin: ".img-about",
-      pinSpacing: false,
-      markers: false,
-    });
-  }
-
   // 2. CARROSSEL Certificados
   let wrapper = document.querySelector(".certified-wrapper");
+
   if (wrapper) {
     gsap.to(wrapper, {
-      x: () => -(wrapper.scrollWidth - window.innerWidth + (isMobile ? window.innerWidth * 0.1 : window.innerWidth * 0.08)), 
+      x: () => -(wrapper.scrollWidth - window.innerWidth + (isMobile ? 20 : 40)),
       ease: "none",
       scrollTrigger: {
         trigger: ".certificados",
-        start: isMobile ? "top -4%" : "top -25%", 
-        end: () => `+=${wrapper.scrollWidth * (isMobile ? 0.8 : 0.6)}`, 
-        pin: false,
-        scrub: 2,
-        invalidateOnRefresh: true, 
+        start: "top top",
+        end: () => `+=${wrapper.scrollWidth}`,
+        pin: ".scroll-horizontal-container",
+        scrub: 1.5,
+        invalidateOnRefresh: true,
       },
     });
   }

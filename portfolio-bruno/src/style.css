@@ -377,7 +377,7 @@ section.conhecimentos {
   background: linear-gradient(90deg, #2563eb, #60a5fa);
 }
 
-/* ESTILO DA SEÇÃO portfólio */
+/* ESTILO DA SEÇÃO PORTFÓLIO */
 
 section.portfolio {
   padding: 50px 4%;
@@ -518,6 +518,15 @@ section.about-me .flex {
   gap: 60px;
 }
 
+.about-me .flex .img-about {
+  flex: 0 0 420px;
+  position: sticky;
+  top: 120px;
+  align-self: flex-start;
+  margin-top: 140px;
+  margin-bottom: 100px;
+}
+
 .about-me .flex .img-about img {
   width: 420px;
   height: auto;
@@ -534,6 +543,10 @@ section.about-me .flex {
 
 .about-me .flex .txt-sobre .soft-skill-title {
   padding: 32px 0 20px 0;
+}
+
+.about-me .head-title .title-target {
+  transform: translateX(100px);
 }
 
 .txt-sobre .grid-softskills {
@@ -677,7 +690,204 @@ section.experiencia {
   text-align: justify;
 }
 
-/* ESTILO DA SEÇÃO EXPERIÊNCIA */
+/* ESTILO DA SEÇÃO FORMAÇÃO */
+
+section.formacao {
+  padding: 80px 4%;
+  background-color: var(--bg-page);
+  position: relative;
+  z-index: 5;
+}
+
+/* GRID PRINCIPAL */
+
+.formacao-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* CARD */
+
+.formacao-card {
+  background-color: var(--box-color);
+  border: 1px solid var(--box-border-color);
+  border-radius: 20px;
+  padding: 28px;
+
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  height: 100%;
+
+  transition: 0.3s;
+}
+
+.formacao-card:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-5px);
+}
+
+/* CONTEÚDO INTERNO */
+
+.formacao-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+/* BADGE */
+
+.formacao-card .certified-badge {
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+/* TÍTULO DO CURSO */
+
+.formacao-details > h3 {
+  font-size: 20px;
+  line-height: 1.35;
+
+  margin: 0;
+
+  /* Todos reservam exatamente 2 linhas */
+  height: 70px;
+
+  display: flex;
+  align-items: flex-start;
+}
+
+/*INSTITUIÇÃO*/
+
+.formacao-card .organization-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  /* mesma altura em todos */
+  height: 68px;
+
+  margin: 8px 0 14px;
+  flex-shrink: 0;
+}
+
+.formacao-card .organization-details {
+  min-width: 0;
+}
+
+.formacao-card .organization-details h5 {
+  font-size: 16px;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.formacao-card .organization-details p {
+  font-size: 14px;
+  margin: 3px 0 0;
+  color: var(--detail-color);
+}
+
+/* PERÍODO */
+
+.formacao-periodo {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  align-items: center;
+
+  gap: 18px;
+
+  height: 90px;
+
+  padding: 14px 16px;
+  margin: 0 0 24px;
+
+  background-color: rgba(59, 130, 246, 0.06);
+  border: 1px solid var(--box-border-color);
+  border-radius: 12px;
+
+  flex-shrink: 0;
+}
+
+.periodo-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.periodo-item span {
+  color: var(--detail-color);
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.periodo-item strong {
+  color: var(--font-color);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.periodo-separador {
+  width: 1px;
+  height: 36px;
+  background-color: var(--box-border-color);
+}
+
+/* CONTEÚDOS / DISCIPLINAS */
+
+.formacao-topicos {
+  flex: 1;
+  margin: 0;
+}
+
+.formacao-topicos p {
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--font-color);
+}
+
+
+/* BOTÃO */
+
+.btn-formacao {
+  margin-top: 28px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  width: fit-content;
+
+  color: var(--primary-color);
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: 0.3s;
+
+  flex-shrink: 0;
+}
+
+.btn-formacao i {
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.btn-formacao:hover {
+  color: #60a5fa;
+}
+
+.btn-formacao:hover i {
+  transform: translate(3px, -3px);
+}
+
+/* ESTILO DA SEÇÃO CERTIFICADOS */
 
 section.certificados {
   padding: 50px 4% !important;
@@ -688,23 +898,31 @@ section.certificados {
 }
 
 .certificados .head-title {
-  text-align: start;
+  text-align: center;
+}
+
+.certificados .head-title .title-target {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .scroll-horizontal-container {
   width: 100%;
-  display: flex;
   overflow: hidden;
+  position: relative;
 }
 
 .certified-wrapper {
   display: flex;
+  flex-wrap: nowrap;
   gap: 30px;
+  width: max-content;
+  will-change: transform;
 }
 
 .certified-card {
-  width: 400px; /* Largura fixa para os cards não esmagarem */
-  flex-shrink: 0;
+  flex: 0 0 380px;
+  min-width: 380px;
   background-color: var(--box-color);
   border: 1px solid var(--box-border-color);
   border-radius: 20px;
@@ -922,6 +1140,7 @@ footer .line-footer p a:hover {
 /*Media Queries*/
 
 @media (max-width: 600px) {
+  
   .interface {
     max-width: 100%;
     padding: 1%;
@@ -1151,6 +1370,23 @@ footer .line-footer p a:hover {
   .timeline-card p {
     font-size: 13px;
     text-align: left;
+  }
+
+  /* FORMAÇÃO */
+
+  .formacao-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .formacao-details > h3 {
+    height: auto;
+    min-height: 0;
+    margin-bottom: 15px;
+  }
+
+  .formacao-card .organization-card {
+    height: auto;
+    min-height: 60px;
   }
 
   /* CERTIFICADO */
