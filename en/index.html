@@ -1,0 +1,1025 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mateus Schenkel | Data Analyst & Data Engineer</title>
+    <link rel="stylesheet" href="../src/style.css" />
+    <style>
+      /* Keeps the opening screen active before the external JavaScript loads. */
+      #preloader {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: #06111f;
+        opacity: 1;
+        visibility: visible;
+        z-index: 2147483647;
+        transition: opacity 0.55s ease, visibility 0s linear 0.55s;
+      }
+
+      #preloader.preloader-leaving {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+  </head>
+  <body>
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <header>
+          <div class="interface">
+            <div class="logo">
+              <a href="index.html">
+                <img src="../assets/logo/logo-mateus.png" alt="Mateus logo" />
+              </a>
+            </div>
+            <nav class="menu-desktop">
+              <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#portfolio">Projects</a></li>
+                <li><a href="#sobre">About me</a></li>
+                <li><a href="#experiencia">Experience</a></li>
+                <li><a href="#formacao">Education</a></li>
+                <li><a href="#certificacoes">Certificates</a></li>
+                <li><a href="#contato">Contact</a></li>
+              </ul>
+            </nav>
+            <div class="language">
+              <a href="../index.html">PT</a>
+              <span>|</span>
+              <a href="index.html">EN</a>
+            </div>
+            <div class="btn-social">
+              <a href="https://www.linkedin.com/in/mateusschenkel" target="_blank">
+                <button><i class="bi bi-linkedin"></i></button>
+              </a>
+              <a href="https://github.com/Mateus-Schenkel" target="_blank">
+                <button><i class="bi bi-github"></i></button>
+              </a>
+            </div>
+          </div>
+        </header>
+
+        <main>
+          <section class="banner-section" id="home">
+            <div class="hero-media">
+              <video
+                class="hero-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                poster="../assets/presentation/portfolio-intro.gif"
+              >
+                <source src="../assets/presentation/portfolio-intro.mp4" type="video/mp4" />
+              </video>
+              <img class="hero-gif" src="../assets/presentation/portfolio-intro.gif" alt="Mateus animated introduction" />
+            </div>
+            <div class="interface">
+              <div class="txt-banner">
+                <h2>Hello! My name is</h2>
+                <h1>Mateus Schenkel</h1>
+                <p class="hero-subtitle">
+                  Data Analyst focused on SQL, Python, Power BI, and process automation.
+                </p>
+                <div class="hero-actions">
+                  <a href="../assets/resume/resume-mat-en.pdf" class="btn-resume" target="_blank">Download CV EN</a>
+                  <a href="../assets/resume/curriculo-mat-pt.pdf" class="btn-resume btn-resume-outline" target="_blank">Download CV PT</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="conhecimentos">
+            <div class="interface">
+              <div class="head-title">
+                <div class="title-target">
+                  <i class="bi bi-dot"></i>
+                  <h3>Skills</h3>
+                </div>
+                <h2>Technical <span>&</span> professional skills</h2>
+                <p>A concise overview of my technical foundation in analytics and data engineering.</p>
+              </div>
+
+              <div class="flex-conhecimentos">
+                <div class="box-conhecimentos">
+                  <div class="topo-box">
+                    <i class="bi bi-database-fill"></i>
+                    <h3>SQL</h3>
+                  </div>
+                  <div class="progress-container">
+                    <p>Queries, modeling, and optimization</p>
+                    <div class="bar"><div class="progress skill-sql"></div></div>
+                  </div>
+                </div>
+
+                <div class="box-conhecimentos">
+                  <div class="topo-box">
+                    <i class="bi bi-filetype-py"></i>
+                    <h3>Python</h3>
+                  </div>
+                  <div class="progress-container">
+                    <p>ETL, automation, and integrations</p>
+                    <div class="bar"><div class="progress skill-python"></div></div>
+                  </div>
+                </div>
+
+                <div class="box-conhecimentos">
+                  <div class="topo-box">
+                    <i class="bi bi-pie-chart-fill"></i>
+                    <h3>Power BI</h3>
+                  </div>
+                  <div class="progress-container">
+                    <p>Dashboards and data storytelling</p>
+                    <div class="bar"><div class="progress skill-power-bi"></div></div>
+                  </div>
+                </div>
+
+                <div class="box-conhecimentos">
+                  <div class="topo-box">
+                    <i class="bi bi-table"></i>
+                    <h3>Excel</h3>
+                  </div>
+                  <div class="progress-container">
+                    <p>Fast analysis and operational support</p>
+                    <div class="bar"><div class="progress skill-excel"></div></div>
+                  </div>
+                </div>
+
+                <div class="box-conhecimentos">
+                  <div class="topo-box">
+                    <i class="bi bi-diagram-3-fill"></i>
+                    <h3>dbt</h3>
+                  </div>
+                  <div class="progress-container">
+                    <p>Transformation, testing, and analytical modeling</p>
+                    <div class="bar"><div class="progress skill-dbt"></div></div>
+                  </div>
+                </div>
+
+                <div class="box-conhecimentos">
+                  <div class="topo-box">
+                    <i class="bi bi-diagram-2-fill"></i>
+                    <h3>Apache Airflow</h3>
+                  </div>
+                  <div class="progress-container">
+                    <p>Pipeline orchestration and scheduling</p>
+                    <div class="bar"><div class="progress skill-airflow"></div></div>
+                  </div>
+                </div>
+
+                <div class="box-conhecimentos">
+                  <div class="topo-box">
+                    <i class="bi bi-git"></i>
+                    <h3>Git/GitHub</h3>
+                  </div>
+                  <div class="progress-container">
+                    <p>Version control and collaboration</p>
+                    <div class="bar"><div class="progress skill-git-github"></div></div>
+                  </div>
+                </div>
+
+                <div class="box-conhecimentos">
+                  <div class="topo-box">
+                    <i class="bi bi-robot"></i>
+                    <h3>Power Automate</h3>
+                  </div>
+                  <div class="progress-container">
+                    <p>RPA and automated report delivery</p>
+                    <div class="bar"><div class="progress skill-power-automate"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="portfolio" id="portfolio">
+            <div class="interface">
+              <div class="head-title">
+                <div class="title-target">
+                  <i class="bi bi-dot"></i>
+                  <h3>Portfolio</h3>
+                </div>
+                <h2>My data <span>projects</span></h2>
+              </div>
+
+              <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+
+                  <div class="swiper-slide">
+                    <div class="card-projetos">
+                      <div class="img-projeto">
+                        <img
+                          src="../assets/projects/sales-dashboard-python.png"
+                          alt="Sales Dashboard developed in Python"
+                        />
+                      </div>
+                      <div class="txt-projeto">
+                        <h3>Sales Dashboard</h3>
+                        <p>
+                          Analytics project focused on consolidating and exploring sales data, with an emphasis on data cleaning, transformation, and management insights.
+                        </p>
+                        <div class="tags">
+                          <span class="python">Python</span>
+                          <span class="html">SQL</span>
+                        </div>
+                        <a
+                          href="https://bi-sales-dashboard.streamlit.app/"
+                          target="_blank"
+                          class="btn-projeto"
+                        >
+                          View live project
+                          <i class="bi bi-box-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>                  
+
+                  <div class="swiper-slide">
+                    <div class="card-projetos">
+                      <div class="img-projeto">
+                        <img
+                          src="../assets/projects/sales-dashboard-powerbi.png"
+                          alt="Sales Dashboard developed in Power BI"
+                        />
+                      </div>
+                      <div class="txt-projeto">
+                        <h3>Sales Dashboard Power BI</h3>
+                        <p>
+                          Analytics dashboard designed to support sales monitoring, with a focus on data visualization and performance insights.
+                        </p>
+                        <div class="tags">
+                          <span class="html">Power BI</span>
+                          <span class="css">DAX</span>
+                          <span class="js">Power Query</span>
+                        </div>
+                        <a
+                          href="https://app.powerbi.com/view?r=eyJrIjoiMzJlZjY1OTQtOWJmZS00M2FhLTg3NTEtOTNkZTc1YzE0NzFhIiwidCI6IjdlODlhNzYzLWY1MzQtNDgwMC1iMmRlLTZlN2JiN2UyMjQ0YSJ9"
+                          target="_blank"
+                          class="btn-projeto"
+                        >
+                          View live project
+                          <i class="bi bi-box-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="card-projetos">
+                      <div class="img-projeto">
+                        <img
+                          src="../assets/projects/hr-dashboard.png"
+                          alt="Human Resources Dashboard developed in Power BI"
+                        />
+                      </div>
+                      <div class="txt-projeto">
+                        <h3>Human Resources Dashboard</h3>
+                        <p>
+                          People Analytics project focused on HR indicators, turnover monitoring, and decision-making support.
+                        </p>
+                        <div class="tags">
+                          <span class="html">Power BI</span>
+                          <span class="css">Excel</span>
+                          <span class="js">DAX</span>
+                        </div>
+                        <a
+                          href="https://app.powerbi.com/view?r=eyJrIjoiMjBkZTc4OGEtMmE1MC00OGRiLWFlMWItNTAzYjkzZWRiMzU4IiwidCI6IjdlODlhNzYzLWY1MzQtNDgwMC1iMmRlLTZlN2JiN2UyMjQ0YSJ9"
+                          target="_blank"
+                          class="btn-projeto"
+                        >
+                          View live project
+                          <i class="bi bi-box-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="card-projetos">
+                      <div class="img-projeto">
+                        <img
+                          src="../assets/projects/logistics-dashboard.png"
+                          alt="Logistics Dashboard developed in Power BI"
+                        />
+                      </div>
+                      <div class="txt-projeto">
+                        <h3>Logistics Dashboard</h3>
+                        <p>
+                          Analytics solution for monitoring logistics operations, shipment volumes, and key performance indicators.
+                        </p>
+                        <div class="tags">
+                          <span class="html">Power BI</span>
+                          <span class="css">SQL</span>
+                        </div>
+                        <a
+                          href="https://app.powerbi.com/view?r=eyJrIjoiM2NmOGY1ZGUtMDJhYi00NTYzLWE0MjUtYTY5MTVkNjVkOTAwIiwidCI6IjdlODlhNzYzLWY1MzQtNDgwMC1iMmRlLTZlN2JiN2UyMjQ0YSJ9"
+                          target="_blank"
+                          class="btn-projeto"
+                        >
+                          View live project
+                          <i class="bi bi-box-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="card-projetos">
+                      <div class="img-projeto">
+                        <img
+                          src="../assets/projects/sql-labs.png"
+                          alt="SQL projects"
+                        />
+                      </div>
+                      <div class="txt-projeto">
+                        <h3>SQL Lab</h3>
+                        <p>
+                          Real-world problems, analysis, and optimization.
+                        </p>
+                        <div class="tags">
+                          <span class="css">SQL</span>
+                        </div>
+                        <a   
+                          href="../cases/sql-query-optimization.html"
+                          target="_blank"
+                          class="btn-projeto"
+                        >
+                          View SQL projects
+                          <i class="bi bi-box-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
+            </div>
+          </section>
+
+
+          <section class="about-me" id="sobre">
+            <div class="interface">
+              <div class="flex">
+                <div class="img-about" data-speed="1" data-lag="0">
+                  <img src="../assets/presentation/mat-profile-pic.jpg" alt="Photo of Mateus" />
+                </div>
+                <div class="txt-sobre">
+                  <div class="head-title">
+                    <div class="title-target">
+                      <i class="bi bi-dot"></i>
+                      <h3>About me</h3>
+                    </div>
+                    <h2>Learn more <span>about me</span></h2>
+                  </div>
+
+                  <p>
+                    Data professional with experience in analytics, automation, and data visualization. I work with SQL, Python, and Power BI to turn data into useful business insights.
+                  </p>
+                  <p>
+                    I am analytical, proactive, and delivery-oriented. I enjoy building end-to-end solutions, from data extraction and processing to dashboards, automations, and reliable workflows.
+                  </p>
+
+                  <h3 class="soft-skill-title">Soft Skills</h3>
+                  <div class="grid-softskills">
+                    <div class="block-soft-skil">
+                      <div class="soft-skill-target">
+                        <i class="bi bi-dot"></i>
+                        <h4>Critical thinking</h4>
+                      </div>
+                      <p>Ability to interpret scenarios and identify patterns.</p>
+                    </div>
+
+                    <div class="block-soft-skil">
+                      <div class="soft-skill-target">
+                        <i class="bi bi-dot"></i>
+                        <h4>Communication</h4>
+                      </div>
+                      <p>I translate technical findings into business language.</p>
+                    </div>
+
+                    <div class="block-soft-skil">
+                      <div class="soft-skill-target">
+                        <i class="bi bi-dot"></i>
+                        <h4>Organization</h4>
+                      </div>
+                      <p>I structure processes, routines, and priorities clearly.</p>
+                    </div>
+
+                    <div class="block-soft-skil">
+                      <div class="soft-skill-target">
+                        <i class="bi bi-dot"></i>
+                        <h4>Ownership</h4>
+                      </div>
+                      <p>I take ownership of results and the continuous improvement of deliverables.</p>
+                    </div>
+
+                    <div class="block-soft-skil">
+                      <div class="soft-skill-target">
+                        <i class="bi bi-dot"></i>
+                        <h4>Adaptability</h4>
+                      </div>
+                      <p>Ability to move effectively between technical and operational contexts.</p>
+                    </div>
+
+                    <div class="block-soft-skil">
+                      <div class="soft-skill-target">
+                        <i class="bi bi-dot"></i>
+                        <h4>Problem solving</h4>
+                      </div>
+                      <p>I identify root causes and propose practical, scalable improvements.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="experiencia" id="experiencia">
+            <div class="interface">
+              <div class="head-title">
+                <div class="title-target">
+                  <i class="bi bi-dot"></i>
+                  <h3>Experience</h3>
+                </div>
+                <h2>My professional <span>experience</span></h2>
+              </div>
+
+              <div class="timeline-container">
+                <div class="timeline-line">
+                  <div class="timeline-progress"></div>
+                </div>
+
+                <div class="timeline-item right">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-date">2025 - Present</div>
+                  <div class="timeline-card">
+                    <div class="topo-card">
+                      <i class="bi bi-dot"></i>
+                      <h3>Nova Capital - Senior Data Analyst</h3>
+                    </div>
+                    <p>
+                      I work with data analysis, automation, and data infrastructure. I develop Python pipelines, optimize SQL Server queries, build Power BI dashboards, and automate report distribution using Power Automate and n8n.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="timeline-item left">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-date">2022 - 2024</div>
+                  <div class="timeline-card">
+                    <div class="topo-card">
+                      <i class="bi bi-dot"></i>
+                      <h3>Multi Armazéns - Data Analyst</h3>
+                    </div>
+                    <p>
+                      Responsible for collecting and analyzing data from OracleDB, optimizing SQL queries, creating Power BI dataflows, and automating information delivery with Power Query Online, M, DAX, and Power Automate.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="timeline-item right">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-date">2020 - 2022</div>
+                  <div class="timeline-card">
+                    <div class="topo-card">
+                      <i class="bi bi-dot"></i>
+                      <h3>DBK / MVL - Financial Assistant</h3>
+                    </div>
+                    <p>
+                      Worked with financial routines, bank reconciliation, accounts payable and receivable, and operational support, strengthening my analytical foundation and process-oriented mindset for the transition into data.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="formacao" id="formacao">
+            <div class="interface">
+              <div class="head-title">
+                <div class="title-target">
+                  <i class="bi bi-dot"></i>
+                  <h3>Education</h3>
+                </div>
+                <h2>My academic <span>background</span></h2>
+              </div>
+
+              <div class="formacao-container">
+                <div class="formacao-grid">
+                  <div class="formacao-card">
+                    <div class="certified-img">
+                    </div>
+                    <div class="certified-details">
+                      <h3>AI, Data Science and Big Data</h3>
+                      <div class="organization-card">
+                        <div class="organization-img">
+                          <img
+                            src="../assets/certifications/pucrs.png"
+                            alt="Logo"
+                          />
+                        </div>
+                        <div class="organization-details">
+                          <h5>PUCRS</h5>
+                          <p>MBA</p>
+                        </div>
+                      </div>
+
+                      <div class="formacao-periodo">
+                        <div class="periodo-item">
+                          <span>Start</span>
+                          <strong>May 2026</strong>
+                        </div>
+
+                        <div class="periodo-separador"></div>
+
+                        <div class="periodo-item">
+                          <span>Expected completion</span>
+                          <strong>May 2027</strong>
+                        </div>
+                      </div>
+                      <div class="formacao-topicos">
+                        <p class="issue-date">IA, Machine Learning e Deep Learning</p>
+                        <p class="issue-date">Data Governance</p>
+                        <p class="issue-date">Cybersecurity and Data Privacy</p>
+                        <p class="issue-date">LLMs and Prompt Engineering</p>
+                        <p class="issue-date">AI-first Business Models</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="formacao-card">
+                    <div class="certified-img">
+                    </div>
+                    <div class="certified-details">
+                      <h3>Database Administration</h3>
+                      <div class="organization-card">
+                        <div class="organization-img">
+                          <img
+                            src="../assets/certifications/metropolitana.jfif"
+                            alt="Logo"
+                          />
+                        </div>
+                        <div class="organization-details">
+                          <h5>Universidade Metropolitana</h5>
+                          <p>MBA</p>
+                        </div>
+                      </div>
+
+                      <div class="formacao-periodo">
+                        <div class="periodo-item">
+                          <span>Start</span>
+                          <strong>October 2023</strong>
+                        </div>
+
+                        <div class="periodo-separador"></div>
+
+                        <div class="periodo-item">
+                          <span>Completion</span>
+                          <strong>April 2024</strong>
+                        </div>
+                      </div>
+                      <div class="formacao-topicos">
+                        <p class="issue-date">Multidimensional Data Modeling</p>
+                        <p class="issue-date">Database Performance</p>
+                        <p class="issue-date">Advanced Queries</p>
+                        <p class="issue-date">Data Mining</p>
+                        <p class="issue-date">Data Warehouse</p>
+                      </div>
+                      <a href="../assets/certifications/dba.png" target="_blank" class="btn-formacao">
+                        View certificate
+                        <i class="bi bi-box-arrow-up-right"></i>
+                      </a>
+
+                    </div>
+                  </div>
+
+                  <div class="formacao-card">
+                    <div class="certified-img">
+                    </div>
+                    <div class="certified-details">
+                      <h3>Financial Management</h3>
+                      <div class="organization-card">
+                        <div class="organization-img">
+                          <img
+                            src="../assets/certifications/feevale.png"
+                            alt="Logo"
+                          />
+                        </div>
+                        <div class="organization-details">
+                          <h5>Universidade Feevale</h5>
+                          <p>Associate Degree</p>
+                        </div>
+                      </div>
+
+                      <div class="formacao-periodo">
+                        <div class="periodo-item">
+                          <span>Start</span>
+                          <strong>January 2019</strong>
+                        </div>
+
+                        <div class="periodo-separador"></div>
+
+                        <div class="periodo-item">
+                          <span>Completion</span>
+                          <strong>July 2022</strong>
+                        </div>
+                      </div>
+                      <div class="formacao-topicos">
+                        <p class="issue-date">Applied Statistics</p>
+                        <p class="issue-date">Financial Mathematics</p>
+                        <p class="issue-date">Accounting Fundamentals</p>
+                        <p class="issue-date">Corporate Budgeting</p>
+                        <p class="issue-date">Investment Project Analysis</p>
+                      </div>
+                      <a href="../assets/certifications/finance-management.png"
+                        target="_blank"
+                        class="btn-formacao">
+
+                        View certificate
+                        <i class="bi bi-box-arrow-up-right"></i>
+
+                      </a>   
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="certificados" id="certificacoes">
+            <div class="interface">
+
+              <div class="head-title">
+                <div class="title-target">
+                  <i class="bi bi-dot"></i>
+                  <h3>Certifications</h3>
+                </div>
+                <h2>My courses and <span>certifications</span></h2>
+              </div>
+              <div class="scroll-horizontal-container">
+                <div class="certified-wrapper">
+
+                  <div class="certified-card">
+                    <div class="certified-details">
+                      <h3>Power BI</h3>
+                      <div class="organization-card">
+                        <div class="organization-img">
+                          <img
+                            src="../assets/certifications/dsa.png"
+                            alt="Logo da Data Science Academy"
+                          />
+                        </div>
+                        <div class="organization-details">
+                          <h5>Data Science Academy</h5>
+                          <p>Business Intelligence</p>
+                        </div>
+                      </div>
+                      <p class="issue-date">
+                        Training focused on data analysis and visualization, applying Business Intelligence best practices.
+                      </p>
+                      <a
+                        href="../assets/certifications/powerbi.png"
+                        target="_blank"
+                        class="btn-certificado"
+                      >
+                        View certificate
+                        <i class="bi bi-box-arrow-up-right"></i>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div class="certified-card">
+                    <div class="certified-details">
+
+                      <h3>Python</h3>
+
+                      <div class="organization-card">
+                        <div class="organization-img">
+                          <img
+                            src="../assets/certifications/hashtag.jfif"
+                            alt="Logo da Hashtag Treinamentos"
+                          />
+                        </div>
+
+                        <div class="organization-details">
+                          <h5>Hashtag Treinamentos</h5>
+                          <p>Python for Data</p>
+                        </div>
+                      </div>
+
+                      <p class="issue-date">
+                        Training focused on automation, data analysis, and dashboard development with Python.
+                      </p>
+
+                      <a
+                        href="../assets/certifications/python2.png"
+                        target="_blank"
+                        class="btn-certificado"
+                      >
+                        View certificate
+                        <i class="bi bi-box-arrow-up-right"></i>
+                      </a>
+
+                    </div>
+                  </div>
+
+
+                  <div class="certified-card">
+                    <div class="certified-details">
+
+                      <h3>Git and GitHub</h3>
+
+                      <div class="organization-card">
+                        <div class="organization-img">
+                          <img
+                            src="../assets/certifications/jornadadedados.jfif"
+                            alt="Logo da Jornada de Dados"
+                          />
+                        </div>
+
+                        <div class="organization-details">
+                          <h5>Jornada de Dados</h5>
+                          <p>Version Control</p>
+                        </div>
+                      </div>
+
+                      <p class="issue-date">
+                        Project versioning, change tracking, and collaboration with Git and GitHub.
+                      </p>
+
+                      <a
+                        href="../assets/certifications/git-github.png"
+                        target="_blank"
+                        class="btn-certificado"
+                      >
+                        View certificate
+                        <i class="bi bi-box-arrow-up-right"></i>
+                      </a>
+
+                    </div>
+                  </div>
+
+
+                  <div class="certified-card">
+                    <div class="certified-details">
+
+                      <h3>Bootcamp DBT Core</h3>
+
+                      <div class="organization-card">
+                        <div class="organization-img">
+                          <img
+                            src="../assets/certifications/jornadadedados.jfif"
+                            alt="Logo da Jornada de Dados"
+                          />
+                        </div>
+
+                        <div class="organization-details">
+                          <h5>Jornada de Dados</h5>
+                          <p>Data Build Tool</p>
+                        </div>
+                      </div>
+
+                      <p class="issue-date">
+                        Fundamentals and a hands-on project following best practices for using the tool.
+                      </p>
+
+                      <a
+                        href="../assets/certifications/dbt.png"
+                        target="_blank"
+                        class="btn-certificado"
+                      >
+                        View certificate
+                        <i class="bi bi-box-arrow-up-right"></i>
+                      </a>
+
+                    </div>
+                  </div>
+
+
+                  <div class="certified-card">
+                    <div class="certified-details">
+
+                      <h3>Communication e Oratória</h3>
+
+                      <div class="organization-card">
+                        <div class="organization-img">
+                          <img
+                            src="../assets/certifications/conquer.png"
+                            alt="Logo da Conquer"
+                          />
+                        </div>
+
+                        <div class="organization-details">
+                          <h5>Conquer</h5>
+                          <p>Communication</p>
+                        </div>
+                      </div>
+
+                      <p class="issue-date">
+                        Development of communication skills, idea presentation, and alignment with different audiences.
+                      </p>
+
+                      <a
+                        href="../assets/certifications/communication-public-speaking.png"
+                        target="_blank"
+                        class="btn-certificado"
+                      >
+                        View certificate
+                        <i class="bi bi-box-arrow-up-right"></i>
+                      </a>
+
+                    </div>
+                  </div>
+
+
+                  <div class="certified-card">
+                    <div class="certified-details">
+
+                      <h3>Leadership Training</h3>
+
+                      <div class="organization-card">
+                        <div class="organization-img">
+                          <img
+                            src="../assets/certifications/conquer.png"
+                            alt="Logo da Conquer"
+                          />
+                        </div>
+
+                        <div class="organization-details">
+                          <h5>Conquer</h5>
+                          <p>Leadership</p>
+                        </div>
+                      </div>
+
+                      <p class="issue-date">
+                        Leadership of high-performing teams in collaborative, fast-growing environments.
+                      </p>
+
+                      <a
+                        href="../assets/certifications/leadership.png"
+                        target="_blank"
+                        class="btn-certificado"
+                      >
+                        View certificate
+                        <i class="bi bi-box-arrow-up-right"></i>
+                      </a>
+
+                    </div>
+                  </div>
+
+                  <div class="certified-card">
+                    <div class="certified-details">
+
+                      <h3>Time Management</h3>
+
+                      <div class="organization-card">
+                        <div class="organization-img">
+                          <img
+                            src="../assets/certifications/conquer.png"
+                            alt="Logo da Conquer"
+                          />
+                        </div>
+
+                        <div class="organization-details">
+                          <h5>Conquer</h5>
+                          <p>Productivity</p>
+                        </div>
+                      </div>
+
+                      <p class="issue-date">
+                        Priority organization, time management, and delivery planning.
+                      </p>
+
+                      <a
+                        href="../assets/certifications/time-management.png"
+                        target="_blank"
+                        class="btn-certificado"
+                      >
+                        View certificate
+                        <i class="bi bi-box-arrow-up-right"></i>
+                      </a>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="contato" id="contato">
+            <div class="interface">
+              <div class="head-title">
+                <div class="title-target">
+                  <i class="bi bi-dot"></i>
+                  <h3>Contact</h3>
+                </div>
+                <h2>Let's <span>talk!</span></h2>
+              </div>
+
+              <div class="flex">
+                <div class="contato-info">
+                  <p>
+                    Feel free to reach out about job opportunities, projects, data, and automation. I enjoy discussing practical solutions and analytics challenges.
+                  </p>
+                  <div class="social-link">
+                    <a href="https://www.linkedin.com/in/mateusschenkel" target="_blank">
+                      <div class="social-card">
+                        <i class="bi bi-linkedin"></i>
+                        <span>LinkedIn</span>
+                      </div>
+                    </a>
+                    <a href="https://github.com/Mateus-Schenkel" target="_blank">
+                      <div class="social-card">
+                        <i class="bi bi-github"></i>
+                        <span>GitHub</span>
+                      </div>
+                    </a>
+                    <a href="mailto:mateusschenkel@gmail.com" target="_blank">
+                      <div class="social-card">
+                        <i class="bi bi-envelope-fill"></i>
+                        <span>E-mail</span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="form-container">
+                  <form action="">
+                    <input type="text" name="nome" placeholder="Your full name" required />
+                    <input type="text" name="assunto" placeholder="Message subject" required />
+                    <textarea name="conteudo" placeholder="Write your message here..." required></textarea>
+                    <button type="submit" class="btn-enviar">Send Message</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer>
+          <div class="inteface">
+            <div class="line-footer">
+              <div class="flex">
+                <div class="logo-footer">
+                  <img src="../assets/logo/logo-mateus.png" alt="Mateus logo" />
+                </div>
+                <div class="btn-social">
+                  <a href="https://www.linkedin.com/in/mateusschenkel" target="_blank">
+                    <button><i class="bi bi-linkedin"></i></button>
+                  </a>
+                  <a href="https://github.com/Mateus-Schenkel" target="_blank">
+                    <button><i class="bi bi-github"></i></button>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="line-footer borda">
+              <p><i class="bi bi-envelope-fill"></i> <a href="mailto:mateusschenkel@gmail.com">mateusschenkel@gmail.com</a></p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <div id="preloader">
+      <img src="../assets/logo/logo-mateus.png" alt="Loading Mateus Schenkel" class="preloader-logo" />
+    </div>
+
+    <script>
+      // The opening animation does not depend on GSAP and also works when the file is opened locally.
+      (() => {
+        const preloader = document.getElementById("preloader");
+        const closePreloader = () => preloader?.classList.add("preloader-leaving");
+
+        // The screen remains visible for 1.45 s; including the fade, the introduction lasts 2 s in total.
+        window.addEventListener("load", () => window.setTimeout(closePreloader, 1450), { once: true });
+        window.setTimeout(closePreloader, 3500);
+      })();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollSmoother.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="../src/script.js"></script>
+  </body>
+</html>

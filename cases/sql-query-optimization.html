@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>SQL Lab | Otimização de Query</title>
+
+    <link rel="stylesheet" href="../src/style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+  </head>
+
+  <body class="sql-case-page">
+
+    <!-- HEADER -->
+    <header class="sql-case-header">
+      <div class="interface sql-case-header-content">
+
+        <a href="../index.html" class="sql-case-logo">
+          <img
+            src="../assets/logo/logo-mateus.png"
+            alt="Logo Mateus Schenkel"
+          />
+        </a>
+
+        <a href="../index.html#portfolio" class="btn-voltar-portfolio">
+          <i class="bi bi-arrow-left"></i>
+          Voltar ao portfólio
+        </a>
+
+      </div>
+    </header>
+
+
+    <main>
+
+      <!-- HERO -->
+      <section class="sql-case-hero">
+        <div class="interface">
+
+          <div class="sql-case-kicker">
+            <i class="bi bi-dot"></i>
+            SQL Lab
+          </div>
+
+          <h1>
+            Otimização de consulta
+            <span>SQL Server</span>
+          </h1>
+
+          <p class="sql-case-intro">
+            Estudo de caso focado em identificar gargalos de performance,
+            analisar a causa do problema e reestruturar uma consulta para
+            melhorar sua eficiência.
+          </p>
+
+          <div class="sql-case-tags">
+            <span>SQL Server</span>
+            <span>Performance</span>
+            <span>Índices</span>
+            <span>Execution Plan</span>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- PERGUNTA DE NEGÓCIO -->
+      <section class="sql-case-section">
+        <div class="interface">
+
+          <span class="sql-section-number">01</span>
+          <h2>Pergunta de negócio</h2>
+
+          <div class="business-question">
+            <i class="bi bi-question-circle"></i>
+
+            <p>
+              Como identificar os clientes que mais geraram receita nos
+              últimos 90 dias sem comprometer o tempo de resposta do dashboard?
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- CONTEXTO -->
+      <section class="sql-case-section">
+        <div class="interface">
+
+          <span class="sql-section-number">02</span>
+          <h2>Contexto do problema</h2>
+
+          <p class="sql-case-text">
+            Uma consulta utilizada para alimentar um relatório comercial
+            apresentava aumento progressivo no tempo de execução conforme o
+            volume de vendas crescia.
+          </p>
+
+          <p class="sql-case-text">
+            O objetivo da investigação foi identificar quais operações estavam
+            causando maior custo ao SQL Server e reduzir o processamento sem
+            alterar o resultado esperado pelo negócio.
+          </p>
+
+        </div>
+      </section>
+
+
+      <!-- QUERY ANTIGA -->
+      <section class="sql-case-section">
+        <div class="interface">
+
+          <span class="sql-section-number">03</span>
+
+          <div class="sql-section-heading">
+            <div>
+              <h2>Query original</h2>
+              <p>Consulta utilizada antes da otimização.</p>
+            </div>
+
+            <span class="status-badge status-problem">
+              <i class="bi bi-exclamation-triangle"></i>
+              Problema
+            </span>
+          </div>
+
+          <div class="code-container">
+
+            <div class="code-header">
+              <span>SQL</span>
+              <span>Query antiga</span>
+            </div>
+
+<pre><code>SELECT
+    c.IdCliente,
+    c.Nome,
+    c.Segmento,
+    SUM(v.ValorTotal) AS Receita90Dias,
+    COUNT(v.IdVenda) AS QuantidadeVendas
+FROM dbo.Clientes c
+INNER JOIN dbo.Vendas v
+    ON v.IdCliente = c.IdCliente
+WHERE
+    CONVERT(DATE, v.DataVenda) >=
+        CONVERT(DATE, DATEADD(DAY, -90, GETDATE()))
+    AND UPPER(v.Status) = 'APROVADA'
+GROUP BY
+    c.IdCliente,
+    c.Nome,
+    c.Segmento
+ORDER BY
+    Receita90Dias DESC;</code></pre>
+
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- INVESTIGAÇÃO -->
+      <section class="sql-case-section">
+        <div class="interface">
+
+          <span class="sql-section-number">04</span>
+          <h2>Investigação</h2>
+
+          <p class="sql-case-text">
+            Antes de alterar a consulta, o primeiro passo foi medir seu
+            comportamento utilizando as estatísticas do SQL Server.
+          </p>
+
+          <div class="code-container">
+
+            <div class="code-header">
+              <span>SQL</span>
+              <span>Diagnóstico</span>
+            </div>
+
+<pre><code>SET STATISTICS IO ON;
+SET STATISTICS TIME ON;
+
+-- Executar a consulta analisada aqui
+
+SET STATISTICS IO OFF;
+SET STATISTICS TIME OFF;</code></pre>
+
+          </div>
+
+
+          <div class="analysis-grid">
+
+            <div class="analysis-card">
+              <i class="bi bi-search"></i>
+
+              <h3>Execution Plan</h3>
+
+              <p>
+                Verificação de operações de alto custo, scans e possíveis
+                gargalos na estratégia utilizada pelo otimizador.
+              </p>
+            </div>
+
+
+            <div class="analysis-card">
+              <i class="bi bi-speedometer2"></i>
+
+              <h3>Logical Reads</h3>
+
+              <p>
+                Análise da quantidade de páginas lidas pelo SQL Server durante
+                a execução da consulta.
+              </p>
+            </div>
+
+
+            <div class="analysis-card">
+              <i class="bi bi-clock-history"></i>
+
+              <h3>Execution Time</h3>
+
+              <p>
+                Comparação do tempo de CPU e tempo total antes e depois da
+                otimização.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- PROBLEMAS -->
+      <section class="sql-case-section">
+        <div class="interface">
+
+          <span class="sql-section-number">05</span>
+          <h2>Problemas encontrados</h2>
+
+          <div class="problem-list">
+
+            <div class="problem-item">
+
+              <div class="problem-number">01</div>
+
+              <div>
+                <h3>Função aplicada na coluna de data</h3>
+
+                <p>
+                  O uso de CONVERT diretamente sobre DataVenda dificulta o
+                  aproveitamento eficiente de índices existentes.
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="problem-item">
+
+              <div class="problem-number">02</div>
+
+              <div>
+                <h3>Transformação do campo Status</h3>
+
+                <p>
+                  Aplicar UPPER durante o filtro adiciona processamento e pode
+                  prejudicar estratégias eficientes de busca.
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="problem-item">
+
+              <div class="problem-number">03</div>
+
+              <div>
+                <h3>Estratégia de índice</h3>
+
+                <p>
+                  A consulta dependia de colunas frequentemente utilizadas nos
+                  filtros, relacionamento e agregação.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- NOVA QUERY -->
+      <section class="sql-case-section">
+        <div class="interface">
+
+          <span class="sql-section-number">06</span>
+
+          <div class="sql-section-heading">
+
+            <div>
+              <h2>Query otimizada</h2>
+              <p>
+                Reestruturação mantendo a mesma regra de negócio.
+              </p>
+            </div>
+
+            <span class="status-badge status-solution">
+              <i class="bi bi-check-circle"></i>
+              Solução
+            </span>
+
+          </div>
+
+
+          <div class="code-container">
+
+            <div class="code-header">
+              <span>SQL</span>
+              <span>Query otimizada</span>
+            </div>
+
+<pre><code>DECLARE @DataInicial DATETIME2(0);
+
+SET @DataInicial = DATEADD(DAY, -90, SYSDATETIME());
+
+SELECT
+    c.IdCliente,
+    c.Nome,
+    c.Segmento,
+    SUM(v.ValorTotal) AS Receita90Dias,
+    COUNT(*) AS QuantidadeVendas
+FROM dbo.Vendas v
+INNER JOIN dbo.Clientes c
+    ON c.IdCliente = v.IdCliente
+WHERE
+    v.DataVenda >= @DataInicial
+    AND v.Status = 'APROVADA'
+GROUP BY
+    c.IdCliente,
+    c.Nome,
+    c.Segmento
+ORDER BY
+    Receita90Dias DESC;</code></pre>
+
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ÍNDICE -->
+      <section class="sql-case-section">
+        <div class="interface">
+
+          <span class="sql-section-number">07</span>
+          <h2>Estratégia de índice</h2>
+
+          <p class="sql-case-text">
+            Além da reescrita da consulta, foi avaliado um índice compatível
+            com as colunas utilizadas pelo filtro e pelo processamento da
+            consulta.
+          </p>
+
+          <div class="code-container">
+
+            <div class="code-header">
+              <span>SQL</span>
+              <span>Índice analisado</span>
+            </div>
+
+<pre><code>CREATE INDEX IX_Vendas_Status_DataVenda_Cliente
+ON dbo.Vendas (
+    Status,
+    DataVenda,
+    IdCliente
+)
+INCLUDE (
+    ValorTotal
+);</code></pre>
+
+          </div>
+
+          <div class="sql-note">
+            <i class="bi bi-info-circle"></i>
+
+            <p>
+              Um índice não deve ser criado automaticamente apenas porque
+              beneficia uma consulta. É necessário avaliar seletividade,
+              volume de dados, frequência de escrita e demais workloads da
+              tabela.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- RESULTADOS -->
+      <section class="sql-case-section">
+        <div class="interface">
+
+          <span class="sql-section-number">08</span>
+          <h2>Resultado</h2>
+
+          <p class="sql-case-text">
+            A validação deve comparar a mesma consulta, utilizando o mesmo
+            conjunto de dados e ambiente, antes e depois da alteração.
+          </p>
+
+
+          <div class="result-grid">
+
+            <div class="result-card">
+              <span>Antes</span>
+              <strong>XX s</strong>
+              <p>Tempo de execução</p>
+            </div>
+
+
+            <div class="result-card">
+              <span>Depois</span>
+              <strong>XX ms</strong>
+              <p>Tempo de execução</p>
+            </div>
+
+
+            <div class="result-card result-highlight">
+              <span>Melhoria</span>
+              <strong>XX%</strong>
+              <p>Redução do tempo</p>
+            </div>
+
+          </div>
+
+
+          <div class="sql-note">
+            <i class="bi bi-bar-chart"></i>
+
+            <p>
+              Substitua os valores acima pelas medições reais obtidas com
+              STATISTICS IO, STATISTICS TIME e o plano de execução.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- CONCLUSÃO -->
+      <section class="sql-case-section sql-case-conclusion">
+        <div class="interface">
+
+          <span class="sql-section-number">09</span>
+          <h2>Conclusão técnica</h2>
+
+          <p>
+            O ganho de performance não veio simplesmente de escrever uma query
+            menor, mas de entender como o SQL Server acessava os dados.
+          </p>
+
+          <p>
+            A combinação entre filtros SARGable, análise do plano de execução,
+            estatísticas de I/O e estratégia adequada de índices permitiu
+            reduzir o custo da consulta preservando a regra de negócio.
+          </p>
+
+
+          <div class="conclusion-tags">
+            <span>SARGability</span>
+            <span>Execution Plan</span>
+            <span>Indexing</span>
+            <span>STATISTICS IO</span>
+            <span>Performance Tuning</span>
+          </div>
+
+
+          <a href="../index.html#portfolio" class="btn-voltar-final">
+            <i class="bi bi-arrow-left"></i>
+            Voltar ao portfólio
+          </a>
+
+        </div>
+      </section>
+
+    </main>
+
+  </body>
+</html>
