@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>SQL Lab | Otimização de Consulta</title>
+    <title>SQL Lab | Query Optimization</title>
 
-    <link rel="stylesheet" href="../src/style.css" />
+    <link rel="stylesheet" href="../../src/style.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,14 +30,14 @@
 
         <a href="../index.html" class="sql-case-logo">
           <img
-            src="../assets/logo/logo-mateus.png"
-            alt="Logo Mateus Schenkel"
+            src="../../assets/logo/logo-mateus.png"
+            alt="Mateus Schenkel logo"
           />
         </a>
 
         <a href="../index.html#portfolio" class="btn-voltar-portfolio">
           <i class="bi bi-arrow-left"></i>
-          Voltar ao portfólio
+          Back to portfolio
         </a>
 
       </div>
@@ -56,33 +56,30 @@
           </div>
 
           <h1>
-            Otimização de consulta
+            Query optimization
             <span>SQL Server</span>
           </h1>
 
           <p class="sql-case-intro">
-            Estudo de caso focado em identificar gargalos de performance,
-            analisar a causa do problema e reestruturar uma consulta para
-            melhorar sua eficiência.
+            Case study focused on identifying performance bottlenecks, analyzing the root cause, and restructuring a query to improve its efficiency.
           </p>
 
         </div>
       </section>
 
 
-      <!-- PERGUNTA DE NEGÓCIO -->
+      <!-- BUSINESS QUESTION -->
       <section class="sql-case-section">
         <div class="interface">
 
           <span class="sql-section-number">01</span>
-          <h2>Pergunta de negócio</h2>
+          <h2>Business question</h2>
 
           <div class="business-question">
             <i class="bi bi-question-circle"></i>
 
             <p>
-              Como identificar os clientes que mais geraram receita nos
-              últimos 90 dias sem comprometer o tempo de resposta do dashboard?
+              How can we identify the customers who generated the most revenue in the last 90 days without compromising dashboard response time?
             </p>
           </div>
 
@@ -90,30 +87,26 @@
       </section>
 
 
-      <!-- CONTEXTO -->
+      <!-- CONTEXT -->
       <section class="sql-case-section">
         <div class="interface">
 
           <span class="sql-section-number">02</span>
-          <h2>Contexto do problema</h2>
+          <h2>Problem context</h2>
 
           <p class="sql-case-text">
-            Uma consulta utilizada para alimentar um relatório comercial
-            apresentava aumento progressivo no tempo de execução conforme o
-            volume de vendas crescia.
+            A query used to feed a sales report showed a progressive increase in execution time as sales volume grew.
           </p>
 
           <p class="sql-case-text">
-            O objetivo da investigação foi identificar quais operações estavam
-            causando maior custo ao SQL Server e reduzir o processamento sem
-            alterar o resultado esperado pelo negócio.
+            The goal of the investigation was to identify which operations were causing the highest cost in SQL Server and reduce processing without changing the expected business result.
           </p>
 
         </div>
       </section>
 
 
-      <!-- QUERY ANTIGA -->
+      <!-- ORIGINAL QUERY -->
       <section class="sql-case-section">
         <div class="interface">
 
@@ -121,13 +114,13 @@
 
           <div class="sql-section-heading">
             <div>
-              <h2>Query original</h2>
-              <p>Consulta utilizada antes da otimização.</p>
+              <h2>Original query</h2>
+              <p>Query used before optimization.</p>
             </div>
 
             <span class="status-badge status-problem">
               <i class="bi bi-exclamation-triangle"></i>
-              Problema
+              Issue
             </span>
           </div>
 
@@ -138,29 +131,29 @@
             </div>
 
 <pre><code>SELECT
-    c.CustomerKey,      -- Identifica cada cliente de forma única
-    c.CustomerName,     -- Exibe o nome do cliente no resultado
-    c.Segment,          -- Permite analisar o cliente pelo segmento
-    SUM(s.TotalAmount) AS Revenue90Days, -- Soma a receita gerada nos últimos 90 dias
-    COUNT(s.SaleKey) AS SalesCount       -- Conta quantas vendas o cliente realizou
+    c.CustomerKey,      -- Uniquely identifies each customer
+    c.CustomerName,     -- Displays the customer name in the result
+    c.Segment,          -- Keeps the customer segment available for analysis
+    SUM(s.TotalAmount) AS Revenue90Days, -- Sums revenue generated in the last 90 days
+    COUNT(s.SaleKey) AS SalesCount       -- Counts how many sales the customer made
 FROM gold.DimCustomer c
 INNER JOIN gold.FactSales s
-    ON s.CustomerKey = c.CustomerKey     -- Relaciona cada venda ao respectivo cliente
+    ON s.CustomerKey = c.CustomerKey     -- Links each sale to its respective customer
 WHERE
     CONVERT(DATE, s.SaleDate) >=
         CONVERT(DATE, DATEADD(DAY, -90, GETDATE()))
-        -- Mantém somente vendas dos últimos 90 dias.
-        -- O CONVERT na coluna SaleDate será um dos pontos avaliados na otimização.
+        -- Keeps only sales from the last 90 days.
+        -- CONVERT on the SaleDate column is one of the points evaluated during optimization.
 
     AND UPPER(s.Status) = 'APPROVED'
-        -- Considera apenas vendas aprovadas.
-        -- O UPPER aplicado na coluna também será avaliado por adicionar processamento.
+        -- Includes only approved sales.
+        -- UPPER on the column is also evaluated because it adds processing overhead.
 GROUP BY
     c.CustomerKey,
     c.CustomerName,
-    c.Segment           -- Agrupa as vendas para calcular os totais por cliente
+    c.Segment           -- Groups sales to calculate totals by customer
 ORDER BY
-    Revenue90Days DESC; -- Mostra primeiro os clientes com maior receita</code></pre>
+    Revenue90Days DESC; -- Shows customers with the highest revenue first</code></pre>
 
           </div>
 
@@ -168,50 +161,49 @@ ORDER BY
       </section>
 
 
-      <!-- INVESTIGAÇÃO -->
+      <!-- INVESTIGATION -->
       <section class="sql-case-section">
         <div class="interface">
 
           <span class="sql-section-number">04</span>
-          <h2>Investigação</h2>
+          <h2>Investigation</h2>
 
           <p class="sql-case-text">
-            Antes de alterar a consulta, o primeiro passo foi medir seu
-            comportamento utilizando as estatísticas do SQL Server, devemos ligar e desligar as estatisticas como abaixo:
+            Before changing the query, the first step was to measure its behavior using SQL Server statistics. The metrics were enabled and disabled as shown below:
           </p>
 
           <div class="code-container">
 
             <div class="code-header">
               <span>SQL</span>
-              <span>Diagnóstico</span>
+              <span>Diagnostics</span>
             </div>
 
-<pre><code>-- Mostra quantas páginas de dados foram lidas durante a consulta
+<pre><code>-- Shows how many data pages were read during the query
 SET STATISTICS IO ON;
 
--- Mostra o tempo de CPU e o tempo total de execução
+-- Shows CPU time and total execution time
 SET STATISTICS TIME ON;
 
--- Executar aqui a consulta original para medir seu comportamento
+-- Run the original query here to measure its behavior
 
--- Desliga as estatísticas após o teste
+-- Disables statistics after the test
 SET STATISTICS IO OFF;
 SET STATISTICS TIME OFF;</code></pre>
 
           </div>
 
           <p class="sql-case-text">
-            Após executar a consulta com <strong>STATISTICS IO</strong> e
-            <strong>STATISTICS TIME</strong> habilitados, o SQL Server apresenta na aba
-            "Mensagens" métricas que ajudam a avaliar o custo da consulta.
-            <strong>Rows Returned</strong> representa a quantidade de linhas retornadas
-            pelo resultado; <strong>Logical Reads</strong> indica quantas páginas de dados
-            o SQL Server precisou acessar na memória para processar a consulta; e
-            <strong>Execution Time</strong> mostra o tempo gasto pelo processador
-            (<strong>CPU Time</strong>) e o tempo total decorrido
-            (<strong>Elapsed Time</strong>). Os tempos são apresentados em
-            milissegundos (ms).
+            After running the query with <strong>STATISTICS IO</strong> and
+            <strong>STATISTICS TIME</strong> enabled, SQL Server displays metrics in the
+            "Messages" tab that help evaluate query cost.
+            <strong>Rows Returned</strong> represents the number of rows returned
+            by the result; <strong>Logical Reads</strong> indicates how many data pages
+            SQL Server had to access in memory to process the query; and
+            <strong>Execution Time</strong> shows processor time
+            (<strong>CPU Time</strong>) and total elapsed time
+            (<strong>Elapsed Time</strong>). Times are shown in
+            milliseconds (ms).
           </p>
 
           <div class="analysis-grid">
@@ -222,8 +214,8 @@ SET STATISTICS TIME OFF;</code></pre>
               <h3>Rows Returned</h3>
 
               <p>
-                A consulta original retornou <strong>16.557 linhas</strong>
-                no conjunto analisado.
+                The original query returned <strong>16,557 rows</strong>
+                in the analyzed dataset.
               </p>
             </div>
 
@@ -234,8 +226,8 @@ SET STATISTICS TIME OFF;</code></pre>
               <h3>Logical Reads</h3>
 
               <p>
-                <strong>FactSales: 10.697</strong> leituras lógicas e
-                <strong>DimCustomer: 279</strong> leituras lógicas.
+                <strong>FactSales: 10,697</strong> logical reads and
+                <strong>DimCustomer: 279</strong> logical reads.
               </p>
             </div>
 
@@ -247,7 +239,7 @@ SET STATISTICS TIME OFF;</code></pre>
 
               <p>
                 <strong>CPU: 484 ms</strong><br />
-                <strong>Tempo decorrido: 708 ms</strong>
+                <strong>Elapsed time: 708 ms</strong>
               </p>
             </div>
 
@@ -257,12 +249,12 @@ SET STATISTICS TIME OFF;</code></pre>
       </section>
 
 
-      <!-- PROBLEMAS -->
+      <!-- ISSUES -->
       <section class="sql-case-section">
         <div class="interface">
 
           <span class="sql-section-number">05</span>
-          <h2>Problemas encontrados</h2>
+          <h2>Issues encontrados</h2>
 
           <div class="problem-list">
 
@@ -274,8 +266,7 @@ SET STATISTICS TIME OFF;</code></pre>
                 <h3>CONVERT</h3>
 
                 <p>
-                  O uso de CONVERT diretamente sobre SaleDate dificulta o
-                  aproveitamento eficiente de índices existentes.
+                  Using CONVERT directly on SaleDate makes it harder for SQL Server to efficiently use existing indexes.
                 </p>
               </div>
 
@@ -290,8 +281,7 @@ SET STATISTICS TIME OFF;</code></pre>
                 <h3>UPPER</h3>
 
                 <p>
-                  Aplicar UPPER durante o filtro adiciona processamento e pode
-                  prejudicar estratégias eficientes de busca.
+                  Applying UPPER in the filter adds processing overhead and can reduce the efficiency of search strategies.
                 </p>
               </div>
 
@@ -303,11 +293,10 @@ SET STATISTICS TIME OFF;</code></pre>
               <div class="problem-number">03</div>
 
               <div>
-                <h3>ÍNDICE</h3>
+                <h3>INDEX</h3>
 
                 <p>
-                  A consulta dependia de colunas frequentemente utilizadas nos
-                  filtros, relacionamento e agregação.
+                  The query relied on columns frequently used in filters, joins, and aggregation.
                 </p>
               </div>
 
@@ -319,18 +308,18 @@ SET STATISTICS TIME OFF;</code></pre>
       </section>
 
 
-      <!-- ÍNDICE -->
+      <!-- INDEX -->
       <section class="sql-case-section">
         <div class="interface">
 
           <span class="sql-section-number">06</span>
-          <h2>Ajuste - INDEX</h2>
+          <h2>Adjustment - INDEX</h2>
 
           <p class="sql-case-text">
-            Antes de propor um novo índice, o primeiro passo foi verificar os
-            índices já existentes em <strong>gold.FactSales</strong>. Isso evita
-            estruturas redundantes e permite avaliar se algum índice atual já
-            atende às colunas utilizadas pela consulta.
+            Before proposing a new index, the first step was to review the
+            indexes already available on <strong>gold.FactSales</strong>. This avoids
+            redundant structures and helps determine whether an existing index already
+            supports the columns used by the query.
           </p>
 
           <div class="code-container">
@@ -340,51 +329,49 @@ SET STATISTICS TIME OFF;</code></pre>
             </div>
 
 <pre><code>SELECT
-    i.name AS IndexName,                       -- Nome do índice encontrado
-    i.type_desc AS IndexType,                  -- Informa se é clustered ou nonclustered
-    i.is_unique AS IsUnique,                   -- Mostra se o índice exige valores únicos
-    c.name AS ColumnName,                      -- Coluna que faz parte do índice
-    ic.key_ordinal AS KeyOrder,                -- Ordem da coluna dentro da chave do índice
-    ic.is_included_column AS IsIncludedColumn  -- Indica se a coluna está apenas no INCLUDE
+    i.name AS IndexName,                       -- Name of the index found
+    i.type_desc AS IndexType,                  -- Indicates whether the index is clustered or nonclustered
+    i.is_unique AS IsUnique,                   -- Shows whether the index requires unique values
+    c.name AS ColumnName,                      -- Column that is part of the index
+    ic.key_ordinal AS KeyOrder,                -- Column order within the index key
+    ic.is_included_column AS IsIncludedColumn  -- Indicates whether the column is only in INCLUDE
 FROM sys.indexes i
 INNER JOIN sys.index_columns ic
     ON i.object_id = ic.object_id
-    AND i.index_id = ic.index_id               -- Liga o índice às suas colunas
+    AND i.index_id = ic.index_id               -- Links the index to its columns
 INNER JOIN sys.columns c
     ON ic.object_id = c.object_id
-    AND ic.column_id = c.column_id             -- Recupera o nome de cada coluna
+    AND ic.column_id = c.column_id             -- Retrieves the name of each column
 WHERE
-    i.object_id = OBJECT_ID('gold.FactSales')  -- Analisa somente a tabela usada no teste
-    AND i.is_hypothetical = 0                  -- Ignora índices hipotéticos do otimizador
+    i.object_id = OBJECT_ID('gold.FactSales')  -- Analyzes only the table used in the test
+    AND i.is_hypothetical = 0                  -- Ignores hypothetical indexes created by the optimizer
 ORDER BY
     i.name,
     ic.is_included_column,
     ic.key_ordinal,
-    ic.index_column_id;                        -- Organiza o resultado para facilitar a leitura</code></pre>
+    ic.index_column_id;                        -- Orders the result to make it easier to read</code></pre>
 
           </div>
 
           <p class="sql-case-text">
-            Caso a verificação confirme que não existe um índice adequado para o
-            padrão de filtro e relacionamento da consulta, a seguinte estratégia
-            pode então ser testada.
+            If the review confirms that there is no suitable index for the query's filter and join pattern, the following strategy can then be tested.
           </p>
 
           <div class="code-container">
 
             <div class="code-header">
               <span>SQL</span>
-              <span>Índice analisado</span>
+              <span>Index evaluated</span>
             </div>
 
 <pre><code>CREATE NONCLUSTERED INDEX IX_FactSales_Status_SaleDate_CustomerKey
 ON gold.FactSales (
-    Status,       -- Usado no filtro para manter somente vendas APPROVED
-    SaleDate,     -- Usado no filtro dos últimos 90 dias
-    CustomerKey   -- Usado no relacionamento com DimCustomer
+    Status,       -- Used in the filter to keep only APPROVED sales
+    SaleDate,     -- Used in the last 90 days filter
+    CustomerKey   -- Used in the join with DimCustomer
 )
 INCLUDE (
-    TotalAmount   -- Necessário para calcular a receita sem buscar a coluna fora do índice
+    TotalAmount   -- Needed to calculate revenue without looking up the column outside the index
 );</code></pre>
 
           </div>
@@ -392,7 +379,7 @@ INCLUDE (
         </div>
       </section>
 
-      <!-- NOVA QUERY -->
+      <!-- NEW QUERY -->
       <section class="sql-case-section">
         <div class="interface">
 
@@ -401,15 +388,15 @@ INCLUDE (
           <div class="sql-section-heading">
 
             <div>
-              <h2>Ajuste - UPPER, CONVERT</h2>
+              <h2>Adjustment - UPPER, CONVERT</h2>
               <p>
-                Reestruturação da consulta, monitorando a performance.
+                Query restructuring while monitoring performance.
               </p>
             </div>
 
             <span class="status-badge status-solution">
               <i class="bi bi-check-circle"></i>
-              Solução
+              Solution
             </span>
 
           </div>
@@ -421,40 +408,40 @@ INCLUDE (
               <span>SQL</span>
             </div>
 
-<pre><code>-- Ativa as métricas para comparar a nova versão com a consulta original
+<pre><code>-- Enables metrics to compare the new version with the original query
 SET STATISTICS IO ON;
 SET STATISTICS TIME ON;
 GO
 
--- Calcula a data inicial uma única vez, fora do filtro da tabela
+-- Calculates the start date once, outside the table filter
 DECLARE @StartDate DATETIME2(0);
 
 SET @StartDate = DATEADD(DAY, -90, SYSDATETIME());
 
 SELECT
-    c.CustomerKey,      -- Identifica cada cliente de forma única
-    c.CustomerName,     -- Exibe o nome do cliente no resultado
-    c.Segment,          -- Mantém o segmento para análise
-    SUM(s.TotalAmount) AS Revenue90Days, -- Soma a receita dos últimos 90 dias
-    COUNT(*) AS SalesCount               -- Conta as vendas encontradas para cada cliente
+    c.CustomerKey,      -- Uniquely identifies each customer
+    c.CustomerName,     -- Displays the customer name in the result
+    c.Segment,          -- Keeps the segment for analysis
+    SUM(s.TotalAmount) AS Revenue90Days, -- Sums revenue from the last 90 days
+    COUNT(*) AS SalesCount               -- Counts the sales found for each customer
 FROM gold.FactSales s
 INNER JOIN gold.DimCustomer c
-    ON c.CustomerKey = s.CustomerKey     -- Relaciona a venda ao cliente
+    ON c.CustomerKey = s.CustomerKey     -- Links the sale to the customer
 WHERE
     s.SaleDate >= @StartDate
-        -- Filtra diretamente pela coluna SaleDate, sem aplicar CONVERT nela
+        -- Filters directly on SaleDate without applying CONVERT to the column
 
     AND s.Status = 'APPROVED'
-        -- Filtra diretamente pelo status, sem aplicar UPPER na coluna
+        -- Filters directly by status without applying UPPER to the column
 GROUP BY
     c.CustomerKey,
     c.CustomerName,
-    c.Segment           -- Consolida receita e quantidade de vendas por cliente
+    c.Segment           -- Aggregates revenue and sales count by customer
 ORDER BY
-    Revenue90Days DESC; -- Prioriza os clientes que mais geraram receita
+    Revenue90Days DESC; -- Prioritizes customers who generated the most revenue
 GO
 
--- Desliga as métricas após o teste
+-- Disables metrics after the test
 SET STATISTICS IO OFF;
 SET STATISTICS TIME OFF;
 GO</code></pre>
@@ -469,8 +456,8 @@ GO</code></pre>
               <h3>Rows Returned</h3>
 
               <p>
-                A versão otimizada retornou <strong>16.545 linhas</strong>
-                no teste realizado.
+                The optimized version returned <strong>16,545 rows</strong>
+                in the test.
               </p>
             </div>
 
@@ -481,8 +468,8 @@ GO</code></pre>
               <h3>Logical Reads</h3>
 
               <p>
-                <strong>FactSales: 486</strong> leituras lógicas e
-                <strong>DimCustomer: 279</strong> leituras lógicas.
+                <strong>FactSales: 486</strong> logical reads and
+                <strong>DimCustomer: 279</strong> logical reads.
               </p>
             </div>
 
@@ -494,7 +481,7 @@ GO</code></pre>
 
               <p>
                 <strong>CPU: 125 ms</strong><br />
-                <strong>Tempo decorrido: 454 ms</strong>
+                <strong>Elapsed time: 454 ms</strong>
               </p>
             </div>
 
@@ -503,39 +490,38 @@ GO</code></pre>
         </div>
       </section>
 
-      <!-- RESULTADOS -->
+      <!-- RESULTS -->
       <section class="sql-case-section">
         <div class="interface">
 
           <span class="sql-section-number">07</span>
-          <h2>Resultado</h2>
+          <h2>Results</h2>
 
           <p class="sql-case-text">
-            Foram comparados tempo decorrido, CPU
-            e leituras lógicas no mesmo ambiente de testes.
+            Elapsed time, CPU time, and logical reads were compared in the same test environment.
           </p>
 
 
           <div class="result-grid">
 
             <div class="result-card">
-              <span>Antes</span>
+              <span>Before</span>
               <strong>708 ms</strong>
-              <p>Query original</p>
+              <p>Original query</p>
             </div>
 
 
             <div class="result-card">
-              <span>Depois</span>
+              <span>After</span>
               <strong>454 ms</strong>
-              <p>Query otimizada</p>
+              <p>Optimized query</p>
             </div>
 
 
             <div class="result-card result-highlight">
-              <span>Melhoria</span>
+              <span>Improvement</span>
               <strong>35,9%</strong>
-              <p>Redução do tempo decorrido</p>
+              <p>Elapsed time reduction</p>
             </div>
 
           </div>
@@ -547,7 +533,7 @@ GO</code></pre>
               <h3>FactSales Reads</h3>
               <p>
                 <strong>10.697 → 486</strong><br />
-                Redução de <strong>95,5%</strong>.
+                Reduction of <strong>95.5%</strong>.
               </p>
             </div>
 
@@ -556,7 +542,7 @@ GO</code></pre>
               <h3>CPU Time</h3>
               <p>
                 <strong>484 ms → 125 ms</strong><br />
-                Redução de <strong>74,2%</strong>.
+                Reduction of <strong>74.2%</strong>.
               </p>
             </div>
 
@@ -565,7 +551,7 @@ GO</code></pre>
               <h3>Elapsed Time</h3>
               <p>
                 <strong>708 ms → 454 ms</strong><br />
-                Redução de <strong>35,9%</strong>.
+                Reduction of <strong>35.9%</strong>.
               </p>
             </div>
 
@@ -574,24 +560,21 @@ GO</code></pre>
         </div>
       </section>
 
-      <!-- CONCLUSÃO -->
+      <!-- CONCLUSION -->
       <section class="sql-case-section sql-case-conclusion">
         <div class="interface">
 
           <span class="sql-section-number">08</span>
-          <h2>Conclusão</h2>
+          <h2>Conclusion</h2>
 
           <p>
-            Os testes mostraram que ajustes simples podem fazer bastante diferença.
-            A consulta caiu de <strong>708 ms para 454 ms</strong> e as leituras da
-            FactSales foram de <strong>10.697 para 486</strong>.
+            The tests showed that simple adjustments can make a significant difference.
+            Query execution time dropped from <strong>708 ms to 454 ms</strong>, while
+            FactSales logical reads decreased from <strong>10,697 to 486</strong>.
           </p>
 
           <p>
-            Mais importante do que apenas olhar o tempo foi medir o que o SQL Server
-            estava lendo e processando. Também vale conferir os índices existentes
-            antes de criar um novo. Assim, a otimização deixa de ser tentativa e erro
-            e passa a ser uma decisão baseada nos resultados do próprio banco.
+            More important than looking only at execution time was measuring what SQL Server was actually reading and processing. It is also important to review existing indexes before creating a new one. This turns optimization from trial and error into a decision based on the database's own metrics.
           </p>
 
 
@@ -606,7 +589,7 @@ GO</code></pre>
 
           <a href="../index.html#portfolio" class="btn-voltar-final">
             <i class="bi bi-arrow-left"></i>
-            Voltar ao portfólio
+            Back to portfolio
           </a>
 
         </div>

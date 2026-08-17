@@ -1,9 +1,5 @@
 # Mateus Schenkel
-Este repositório apresenta o portfólio do Mat com uma estrutura visual mais forte e voltada para dados.
-
-## Acesse online
-
-[Clique aqui para ver o portfólio publicado](http://bruunossantos.github.io/Portfolio)
+Este repositório apresenta o portfólio do Mateus com uma estrutura visual mais forte e voltada para dados.
 
 ## Tecnologias utilizadas
 
