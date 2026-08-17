@@ -62,8 +62,8 @@
                 <li><a href="#contato">Contato</a></li>
               </ul>
             </nav>
-            <div class="language">
-              <a href="index.html">PT</a>
+            <div class="language-switcher">
+              <a href="index.html" class="active">PT</a>
               <span>|</span>
               <a href="en/index.html">EN</a>
             </div>
@@ -101,7 +101,7 @@
                   Analista de dados com foco em SQL, Python, Power BI e automação de processos.
                 </p>
                 <div class="hero-actions">
-                  <a href="assets/resume/curriculo.pdf" class="btn-resume btn-resume-outline" target="_blank">Download CV</a>
+                  <a href="assets/resume/curriculo.pdf" class="btn-resume btn-resume-outline" target="_blank">Ver currículo</a>
                 </div>
               </div>
             </div>
@@ -1028,7 +1028,7 @@
         const closePreloader = () => preloader?.classList.add("preloader-leaving");
 
         // A tela fica visivel por 1,45 s; com o fade, a introducao dura 2 s no total.
-        window.addEventListener("load", () => window.setTimeout(closePreloader, 1450), { once: true });
+        window.addEventListener("load", () => window.setTimeout(closePreloader, 500), { once: true });
         window.setTimeout(closePreloader, 3500);
       })();
     </script>

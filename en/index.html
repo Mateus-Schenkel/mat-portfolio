@@ -62,10 +62,10 @@
                 <li><a href="#contato">Contact</a></li>
               </ul>
             </nav>
-            <div class="language">
+            <div class="language-switcher">
               <a href="../index.html">PT</a>
               <span>|</span>
-              <a href="index.html">EN</a>
+              <a href="index.html" class="active">EN</a>
             </div>
             <div class="btn-social">
               <a href="https://www.linkedin.com/in/mateusschenkel" target="_blank">
@@ -101,7 +101,7 @@
                   Data Analyst focused on SQL, Python, Power BI, and process automation.
                 </p>
                 <div class="hero-actions">
-                  <a href="../assets/resume/resume.pdf" class="btn-resume" target="_blank">Download CV</a>
+                  <a href="../assets/resume/resume.pdf" class="btn-resume" target="_blank">View ResumeV</a>
                 </div>
               </div>
             </div>
@@ -1024,7 +1024,7 @@
         const closePreloader = () => preloader?.classList.add("preloader-leaving");
 
         // The screen remains visible for 1.45 s; including the fade, the introduction lasts 2 s in total.
-        window.addEventListener("load", () => window.setTimeout(closePreloader, 1450), { once: true });
+        window.addEventListener("load", () => window.setTimeout(closePreloader, 500), { once: true });
         window.setTimeout(closePreloader, 3500);
       })();
     </script>
