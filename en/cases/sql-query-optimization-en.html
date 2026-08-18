@@ -214,7 +214,7 @@ SET STATISTICS TIME OFF;</code></pre>
               <h3>Rows Returned</h3>
 
               <p>
-                The original query returned <strong>16,557 rows</strong>
+                The original query returned <strong>16,449 rows</strong>
                 in the analyzed dataset.
               </p>
             </div>
@@ -226,7 +226,7 @@ SET STATISTICS TIME OFF;</code></pre>
               <h3>Logical Reads</h3>
 
               <p>
-                <strong>FactSales: 10,697</strong> logical reads and
+                <strong>FactSales: 6,618</strong> logical reads and
                 <strong>DimCustomer: 279</strong> logical reads.
               </p>
             </div>
@@ -239,7 +239,7 @@ SET STATISTICS TIME OFF;</code></pre>
 
               <p>
                 <strong>CPU: 484 ms</strong><br />
-                <strong>Elapsed time: 708 ms</strong>
+                <strong>Elapsed time: 796 ms</strong>
               </p>
             </div>
 
@@ -254,7 +254,7 @@ SET STATISTICS TIME OFF;</code></pre>
         <div class="interface">
 
           <span class="sql-section-number">05</span>
-          <h2>Issues encontrados</h2>
+          <h2>Issues found</h2>
 
           <div class="problem-list">
 
@@ -414,9 +414,9 @@ SET STATISTICS TIME ON;
 GO
 
 -- Calculates the start date once, outside the table filter
-DECLARE @StartDate DATETIME2(0);
+DECLARE @StartDate DATE;
 
-SET @StartDate = DATEADD(DAY, -90, SYSDATETIME());
+SET @StartDate = DATEADD(DAY, -90, GETDATE());
 
 SELECT
     c.CustomerKey,      -- Uniquely identifies each customer
@@ -456,7 +456,7 @@ GO</code></pre>
               <h3>Rows Returned</h3>
 
               <p>
-                The optimized version returned <strong>16,545 rows</strong>
+                The optimized version returned <strong>16,449 rows</strong>
                 in the test.
               </p>
             </div>
@@ -468,7 +468,7 @@ GO</code></pre>
               <h3>Logical Reads</h3>
 
               <p>
-                <strong>FactSales: 486</strong> logical reads and
+                <strong>FactSales: 477</strong> logical reads and
                 <strong>DimCustomer: 279</strong> logical reads.
               </p>
             </div>
@@ -481,7 +481,7 @@ GO</code></pre>
 
               <p>
                 <strong>CPU: 125 ms</strong><br />
-                <strong>Elapsed time: 454 ms</strong>
+                <strong>Elapsed time: 286 ms</strong>
               </p>
             </div>
 
@@ -498,7 +498,7 @@ GO</code></pre>
           <h2>Results</h2>
 
           <p class="sql-case-text">
-            Elapsed time, CPU time, and logical reads were compared in the same test environment.
+            Elapsed time, CPU time, and logical reads were compared in the same test environment. Both versions returned <strong>16,449 rows</strong>, preserving the same result for the comparison.
           </p>
 
 
@@ -506,21 +506,21 @@ GO</code></pre>
 
             <div class="result-card">
               <span>Before</span>
-              <strong>708 ms</strong>
+              <strong>796 ms</strong>
               <p>Original query</p>
             </div>
 
 
             <div class="result-card">
               <span>After</span>
-              <strong>454 ms</strong>
+              <strong>286 ms</strong>
               <p>Optimized query</p>
             </div>
 
 
             <div class="result-card result-highlight">
               <span>Improvement</span>
-              <strong>35,9%</strong>
+              <strong>64.1%</strong>
               <p>Elapsed time reduction</p>
             </div>
 
@@ -532,8 +532,8 @@ GO</code></pre>
               <i class="bi bi-speedometer2"></i>
               <h3>FactSales Reads</h3>
               <p>
-                <strong>10.697 → 486</strong><br />
-                Reduction of <strong>95.5%</strong>.
+                <strong>6,618 → 477</strong><br />
+                Reduction of <strong>92.8%</strong>.
               </p>
             </div>
 
@@ -550,8 +550,8 @@ GO</code></pre>
               <i class="bi bi-clock-history"></i>
               <h3>Elapsed Time</h3>
               <p>
-                <strong>708 ms → 454 ms</strong><br />
-                Reduction of <strong>35.9%</strong>.
+                <strong>796 ms → 286 ms</strong><br />
+                Reduction of <strong>64.1%</strong>.
               </p>
             </div>
 
@@ -569,8 +569,8 @@ GO</code></pre>
 
           <p>
             The tests showed that simple adjustments can make a significant difference.
-            Query execution time dropped from <strong>708 ms to 454 ms</strong>, while
-            FactSales logical reads decreased from <strong>10,697 to 486</strong>.
+            Query execution time dropped from <strong>796 ms to 286 ms</strong>, while
+            FactSales logical reads decreased from <strong>6,618 to 477</strong>.
           </p>
 
           <p>

@@ -222,7 +222,7 @@ SET STATISTICS TIME OFF;</code></pre>
               <h3>Rows Returned</h3>
 
               <p>
-                A consulta original retornou <strong>16.557 linhas</strong>
+                A consulta original retornou <strong>16.449 linhas</strong>
                 no conjunto analisado.
               </p>
             </div>
@@ -234,7 +234,7 @@ SET STATISTICS TIME OFF;</code></pre>
               <h3>Logical Reads</h3>
 
               <p>
-                <strong>FactSales: 10.697</strong> leituras lógicas e
+                <strong>FactSales: 6.618</strong> leituras lógicas e
                 <strong>DimCustomer: 279</strong> leituras lógicas.
               </p>
             </div>
@@ -247,7 +247,7 @@ SET STATISTICS TIME OFF;</code></pre>
 
               <p>
                 <strong>CPU: 484 ms</strong><br />
-                <strong>Tempo decorrido: 708 ms</strong>
+                <strong>Tempo decorrido: 796 ms</strong>
               </p>
             </div>
 
@@ -427,9 +427,9 @@ SET STATISTICS TIME ON;
 GO
 
 -- Calcula a data inicial uma única vez, fora do filtro da tabela
-DECLARE @StartDate DATETIME2(0);
+DECLARE @StartDate DATE;
 
-SET @StartDate = DATEADD(DAY, -90, SYSDATETIME());
+SET @StartDate = DATEADD(DAY, -90, GETDATE());
 
 SELECT
     c.CustomerKey,      -- Identifica cada cliente de forma única
@@ -469,7 +469,7 @@ GO</code></pre>
               <h3>Rows Returned</h3>
 
               <p>
-                A versão otimizada retornou <strong>16.545 linhas</strong>
+                A versão otimizada retornou <strong>16.449 linhas</strong>
                 no teste realizado.
               </p>
             </div>
@@ -481,7 +481,7 @@ GO</code></pre>
               <h3>Logical Reads</h3>
 
               <p>
-                <strong>FactSales: 486</strong> leituras lógicas e
+                <strong>FactSales: 477</strong> leituras lógicas e
                 <strong>DimCustomer: 279</strong> leituras lógicas.
               </p>
             </div>
@@ -494,7 +494,7 @@ GO</code></pre>
 
               <p>
                 <strong>CPU: 125 ms</strong><br />
-                <strong>Tempo decorrido: 454 ms</strong>
+                <strong>Tempo decorrido: 286 ms</strong>
               </p>
             </div>
 
@@ -512,7 +512,9 @@ GO</code></pre>
 
           <p class="sql-case-text">
             Foram comparados tempo decorrido, CPU
-            e leituras lógicas no mesmo ambiente de testes.
+            e leituras lógicas no mesmo ambiente de testes. As duas versões
+            retornaram <strong>16.449 linhas</strong>, preservando o mesmo
+            resultado para a comparação.
           </p>
 
 
@@ -520,21 +522,21 @@ GO</code></pre>
 
             <div class="result-card">
               <span>Antes</span>
-              <strong>708 ms</strong>
+              <strong>796 ms</strong>
               <p>Query original</p>
             </div>
 
 
             <div class="result-card">
               <span>Depois</span>
-              <strong>454 ms</strong>
+              <strong>286 ms</strong>
               <p>Query otimizada</p>
             </div>
 
 
             <div class="result-card result-highlight">
               <span>Melhoria</span>
-              <strong>35,9%</strong>
+              <strong>64,1%</strong>
               <p>Redução do tempo decorrido</p>
             </div>
 
@@ -546,8 +548,8 @@ GO</code></pre>
               <i class="bi bi-speedometer2"></i>
               <h3>FactSales Reads</h3>
               <p>
-                <strong>10.697 → 486</strong><br />
-                Redução de <strong>95,5%</strong>.
+                <strong>6.618 → 477</strong><br />
+                Redução de <strong>92,8%</strong>.
               </p>
             </div>
 
@@ -564,8 +566,8 @@ GO</code></pre>
               <i class="bi bi-clock-history"></i>
               <h3>Elapsed Time</h3>
               <p>
-                <strong>708 ms → 454 ms</strong><br />
-                Redução de <strong>35,9%</strong>.
+                <strong>796 ms → 286 ms</strong><br />
+                Redução de <strong>64,1%</strong>.
               </p>
             </div>
 
@@ -583,8 +585,8 @@ GO</code></pre>
 
           <p>
             Os testes mostraram que ajustes simples podem fazer bastante diferença.
-            A consulta caiu de <strong>708 ms para 454 ms</strong> e as leituras da
-            FactSales foram de <strong>10.697 para 486</strong>.
+            A consulta caiu de <strong>796 ms para 286 ms</strong> e as leituras da
+            FactSales foram de <strong>6.618 para 477</strong>.
           </p>
 
           <p>
