@@ -101,3 +101,13 @@ gsap.to(".timeline-progress", {
     scrub: true, 
   },
 });
+
+// Impede o navegador de restaurar a posição anterior da página
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+// Sempre inicia a página no topo
+window.addEventListener("pageshow", () => {
+  window.scrollTo(0, 0);
+});
